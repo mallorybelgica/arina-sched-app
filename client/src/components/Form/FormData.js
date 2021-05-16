@@ -5,6 +5,7 @@ import StepTwoDetails from "./StepTwoDetails";
 const FormData = ({ openModal }) => {
   const [step, setStep] = useState(1);
   const [classType, setClassType] = useState({ classType: "" });
+  const [classTypeChosen, setClassTypeChosen] = useState(false);
   const [formData, setFormData] = useState({
     className: "",
     dateTime: "",
@@ -20,7 +21,10 @@ const FormData = ({ openModal }) => {
   const handleChange = (ev) => {
     setFormData({ ...formData, [ev.target.name]: ev.target.value });
   };
-  const handleClick = (value) => setClassType(value);
+  const handleClick = (value) => {
+    setClassType(value);
+    setClassTypeChosen(true);
+  };
 
   switch (step) {
     case 1:
@@ -30,6 +34,7 @@ const FormData = ({ openModal }) => {
           nextStep={nextStep}
           handleChange={handleChange}
           handleClick={handleClick}
+          classTypeChosen={classTypeChosen}
           classType={classType}
           formData={formData}
         />

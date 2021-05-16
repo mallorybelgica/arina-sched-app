@@ -4,12 +4,14 @@ import styled from "styled-components";
 
 const StepOneDetails = ({
   classType,
+  classTypeChosen,
   formData,
   handleChange,
   handleClick,
   nextStep,
   openModal,
 }) => {
+  console.log(classTypeChosen);
   const next = (ev) => {
     ev.preventDefault();
     nextStep();
@@ -25,85 +27,119 @@ const StepOneDetails = ({
   return (
     <Wrapper>
       <form>
-        <button onClick={openModal}>Back to Class Management</button>
-        <h1>Create Detailed Class</h1>
-        <p>Class Type</p>
-        <div>
-          <div
-            active={classType === "virtualClass"}
-            onClick={() => handleClick("virtualClass")}
+        <CloseButton onClick={openModal}>
+          ← Back to Class Management
+        </CloseButton>
+        <FormTitle>Create Detailed Class</FormTitle>
+        <ClassTypeLabel>Class Type</ClassTypeLabel>
+        <ClassTypeWrapper onClick={() => handleClick("virtualClass")}>
+          <IconWrapper>
+            <Icon src="wifi.png" alt="virtual class" />
+          </IconWrapper>
+          <ClassTypeName>Virtual Class</ClassTypeName>
+          <ClassTypeDesc>Will be hosted online on ARINA live</ClassTypeDesc>
+        </ClassTypeWrapper>
+        <ClassTypeWrapper onClick={() => handleClick("inPersonClass")}>
+          <IconWrapper>
+            <Icon src="bolt.png" alt="in person class" />
+          </IconWrapper>
+          <ClassTypeName>In Person Class</ClassTypeName>
+          <ClassTypeDesc>Will be hosted in person</ClassTypeDesc>
+        </ClassTypeWrapper>
+        <ClassTypeWrapper onClick={() => handleClick("hybridClass")}>
+          <IconWrapper>
+            <Icon src="hybrid.png" alt="hybrid class" />
+          </IconWrapper>
+          <ClassTypeName>Hybrid Class</ClassTypeName>
+          <ClassTypeDesc>
+            Will be hosted both virtually and in person simultaneously
+          </ClassTypeDesc>
+        </ClassTypeWrapper>
+        <FormWrapper>
+          <FormLabel htmlFor="className" classTypeChosen={classTypeChosen}>
+            Class Name
+          </FormLabel>
+          <ClassNameInput
+            id="className"
+            name="className"
+            type="text"
+            onChange={handleChange}
+            value={formData.className}
+            disabled={!classTypeChosen}
+          />
+          <FieldWrapper>
+            <FormLabel htmlFor="dateTime" classTypeChosen={classTypeChosen}>
+              Start Date & Time
+            </FormLabel>
+            <Input
+              id="dateTime"
+              name="dateTime"
+              type="datetime-local"
+              onChange={handleChange}
+              value={formData.dateTime}
+              disabled={!classTypeChosen}
+            />
+          </FieldWrapper>
+          <FieldWrapper>
+            <FormLabel htmlFor="frequency" classTypeChosen={classTypeChosen}>
+              Repeat
+            </FormLabel>
+            <Select
+              id="frequency"
+              name="frequency"
+              onChange={handleChange}
+              value={formData.frequency}
+              disabled={!classTypeChosen}
+            >
+              <option id="none" name="none">
+                None
+              </option>
+              <option id="daily" name="daily">
+                Daily
+              </option>
+              <option id="weekly" name="weekly">
+                Weekly
+              </option>
+              <option id="monthly" name="monthly">
+                Monthly
+              </option>
+            </Select>
+          </FieldWrapper>
+          <FieldWrapper>
+            <FormLabel htmlFor="duration" classTypeChosen={classTypeChosen}>
+              Duration
+            </FormLabel>
+            <Input
+              id="duration"
+              name="duration"
+              type="number"
+              onChange={handleChange}
+              value={formData.duration}
+              disabled={!classTypeChosen}
+            />
+          </FieldWrapper>
+          <FieldWrapper>
+            <FormLabel htmlFor="price" classTypeChosen={classTypeChosen}>
+              Price
+            </FormLabel>
+            <Input
+              id="price"
+              name="price"
+              type="number"
+              onChange={handleChange}
+              value={formData.price}
+              disabled={!classTypeChosen}
+            />
+          </FieldWrapper>
+          <Step classTypeChosen={classTypeChosen}>Step 1 of 2</Step>
+          <NextStep
+            onClick={next}
+            classTypeChosen={classTypeChosen}
+            disabled={!classTypeChosen}
           >
-            <p>Virtual Class</p>
-            <p>Will be hosted online on ARINA live</p>
-          </div>
-          <div
-            active={classType === "inPersonClass"}
-            onClick={() => handleClick("inPersonClass")}
-          >
-            <p>In Person Class</p>
-            <p>Will be hosted in person</p>
-          </div>
-          <div
-            active={classType === "hybridClass"}
-            onClick={() => handleClick("hybridClass")}
-          >
-            <p>Hybrid Class</p>
-            <p>Will be hosted both virtually and in person simultaneously</p>
-          </div>
-        </div>
-        <label htmlFor="className">Class Name</label>
-        <input
-          id="className"
-          name="className"
-          type="text"
-          onChange={handleChange}
-          value={formData.className}
-        />
-        <label htmlFor="dateTime">Start Date & Time</label>
-        <input
-          id="dateTime"
-          name="dateTime"
-          type="datetime-local"
-          onChange={handleChange}
-          value={formData.dateTime}
-        />
-        <label htmlFor="frequency">Repeat</label>
-        <select
-          id="frequency"
-          name="frequency"
-          onChange={handleChange}
-          value={formData.frequency}
-        >
-          <option id="none" name="none">
-            None
-          </option>
-          <option id="daily" name="daily">
-            Daily
-          </option>
-          <option id="weekly" name="weekly">
-            Weekly
-          </option>
-          <option id="monthly" name="monthly">
-            Monthly
-          </option>
-        </select>
-        <label htmlFor="duration">Duration</label>
-        <input
-          id="duration"
-          name="duration"
-          type="number"
-          onChange={handleChange}
-          value={formData.duration}
-        />
-        <label htmlFor="price">Price</label>
-        <input
-          id="price"
-          name="price"
-          type="number"
-          onChange={handleChange}
-          value={formData.price}
-        />
-        <button onClick={next}>Next Step</button>
+            Next Step
+          </NextStep>
+        </FormWrapper>
       </form>
     </Wrapper>
   );
@@ -111,106 +147,143 @@ const StepOneDetails = ({
 
 export default StepOneDetails;
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  padding: 0px 18px;
   position: absolute;
   background-color: #fff;
-  width: 35%;
+  width: 450px;
   height: 100vh;
   right: 0;
   top: 0;
 `;
 
-// return (
-//     <Wrapper>
-//       <button onClick={openModal}>Back to Class Management</button>
-//       <h1>Create Detailed Class</h1>
-//       <p>Class Type</p>
-//       <label htmlFor="virtualClass">
-//         <input
-//           id="virtualClass"
-//           name="classType"
-//           type="radio"
-//           onChange={handleChange}
-//           value="virtualClass"
-//         />
-//         Virtual Class<span>Will be hosted online on ARINA live</span>
-//       </label>
+const FormTitle = styled.h1`
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  font-weight: 500;
+`;
 
-//       <label htmlFor="inPersonClass">
-//         <input
-//           id="inPersonClass"
-//           name="classType"
-//           type="radio"
-//           onChange={handleChange}
-//           value="inPersonClass"
-//         />
-//         In Person Class<span>Will be hosted in person</span>
-//       </label>
+const CloseButton = styled.button`
+  padding-top: 18px;
+  background-color: #fff;
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  color: #7e5d54;
+`;
 
-//       <label htmlFor="hybridClass">
-//         <input
-//           id="hybridClass"
-//           name="classType"
-//           type="radio"
-//           onChange={handleChange}
-//           value="hybridClass"
-//         />
-//         Hybrid Class
-//         <span>Will be hosted both virtually and in person simultaneously</span>
-//       </label>
+const ClassTypeWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px #dad2cb solid;
+  padding: 11.95px;
+  margin-bottom: 18px;
+  border-radius: 3px;
+`;
 
-//       <label htmlFor="className">Class Name</label>
-//       <input
-//         id="className"
-//         name="className"
-//         type="text"
-//         onChange={handleChange}
-//         value={formData.className}
-//       />
-//       <label htmlFor="dateTime">Start Date & Time</label>
-//       <input
-//         id="dateTime"
-//         name="dateTime"
-//         type="datetime-local"
-//         onChange={handleChange}
-//         value={formData.dateTime}
-//       />
-//       <label htmlFor="frequency">Repeat</label>
-//       <select
-//         id="frequency"
-//         name="frequency"
-//         onChange={handleChange}
-//         value={formData.frequency}
-//       >
-//         <option id="none" name="none">
-//           None
-//         </option>
-//         <option id="daily" name="daily">
-//           Daily
-//         </option>
-//         <option id="weekly" name="weekly">
-//           Weekly
-//         </option>
-//         <option id="monthly" name="monthly">
-//           Monthly
-//         </option>
-//       </select>
-//       <label htmlFor="duration">Duration</label>
-//       <input
-//         id="duration"
-//         name="duration"
-//         type="number"
-//         onChange={handleChange}
-//         value={formData.duration}
-//       />
-//       <label htmlFor="price">Duration</label>
-//       <input
-//         id="price"
-//         name="price"
-//         type="number"
-//         onChange={handleChange}
-//         value={formData.price}
-//       />
-//       <button onClick={next}>Next Step</button>
-//     </Wrapper>
-//   );
+const ClassTypeLabel = styled.p`
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+`;
+
+const ClassTypeName = styled.p`
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+  width: 50%;
+`;
+
+const ClassTypeDesc = styled.span`
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+`;
+
+const IconWrapper = styled.div`
+  text-align: center;
+  width: 40.92px;
+  height: 40.92px;
+  margin-right: 11.95px;
+  border-radius: 100%;
+  background-color: rgb(219, 210, 203, 0.15);
+`;
+
+const Icon = styled.img`
+  vertical-align: middle;
+  margin-top: 25%;
+`;
+
+const FormWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 450px;
+`;
+
+const FieldWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 215px;
+  margin-bottom: 18px;
+`;
+
+const FormLabel = styled.label`
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  color: ${(props) =>
+    !props.classTypeChosen ? "rgb(0,0,0,0.15)" : "rgb(0,0,0,0.65)"};
+`;
+
+const ClassNameInput = styled.input`
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  height: 35px;
+  border: 1px #dad2cb solid;
+  border-radius: 3px;
+  margin-bottom: 18px;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  height: 35px;
+  border: 1px #dad2cb solid;
+  border-radius: 3px;
+`;
+
+const Select = styled.select`
+  width: 100%;
+  height: 35px;
+  border: 1px #dad2cb solid;
+  border-radius: 3px;
+`;
+
+const Step = styled.p`
+  position: absolute;
+  width: 50%;
+  bottom: 0;
+  margin-left: -18px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  color: ${(props) =>
+    !props.classTypeChosen ? "rgb(0,0,0,0.15)" : "rgb(0,0,0,0.35)"};
+`;
+
+const NextStep = styled.button`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-right: 18px;
+  margin-bottom: 18px;
+  width: 215px;
+  height: 42.05px;
+  border: none;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  background-color: ${(props) =>
+    !props.classTypeChosen ? "rgb(0,0,0,0.5)" : "rgb(0, 0, 0)"};
+`;
