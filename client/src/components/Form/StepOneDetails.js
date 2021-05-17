@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import styled from "styled-components";
+import Toggle from "./Toggle";
 
 const StepOneDetails = ({
   classType,
@@ -16,6 +17,7 @@ const StepOneDetails = ({
           <CloseButton onClick={openModal}>
             ← Back to Class Management
           </CloseButton>
+          <Toggle />
           <FormTitle>Create Detailed Class</FormTitle>
           <ClassTypeLabel>Class Type</ClassTypeLabel>
           <ClassTypeWrapper

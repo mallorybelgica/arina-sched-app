@@ -23,7 +23,7 @@ const App = () => {
         <Route path="/account">
           <UserAccount />
         </Route>
-        <Route path="/faq">
+        <Route path="/faqs">
           <Faqs />
         </Route>
       </Switch>

@@ -1,11 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { BsThreeDots } from "react-icons/bs";
 import { userClass } from "../data";
 
 const ClassGridItem = (props) => {
   return (
     <Wrapper>
       <NextClass>Your Next Class</NextClass>
+      <BsThreeDots
+        style={{ position: "absolute", marginLeft: "425px", color: "#DBBCAE" }}
+        size={20}
+      />
       <ImageWrapper>
         <Image src={userClass.instructorImage} />
       </ImageWrapper>
