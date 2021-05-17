@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useFormik } from "formik";
 import StepOneDetails from "./StepOneDetails";
 import StepTwoDetails from "./StepTwoDetails";
 
@@ -6,25 +7,35 @@ const FormData = ({ openModal }) => {
   const [step, setStep] = useState(1);
   const [classType, setClassType] = useState({ classType: "" });
   const [classTypeChosen, setClassTypeChosen] = useState(false);
-  const [formData, setFormData] = useState({
-    className: "",
-    dateTime: "",
-    frequency: "",
-    duration: "",
-    price: "",
-    classDesc: "",
-    whiteboard: "",
-  });
 
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
-  const handleChange = (ev) => {
-    setFormData({ ...formData, [ev.target.name]: ev.target.value });
-  };
+
   const handleClick = (value) => {
     setClassType(value);
     setClassTypeChosen(true);
   };
+
+  const formik = useFormik({
+    initialValues: {
+      className: "",
+      dateTime: "",
+      frequency: "",
+      duration: "",
+      price: "",
+      classDesc: "",
+      whiteboard: "",
+      classType,
+    },
+    onSubmit: (values) => {
+      values["classType"] = classType;
+      if (step === 1) {
+        nextStep();
+      } else if (step === 2) {
+        console.log(values);
+      }
+    },
+  });
 
   switch (step) {
     case 1:
@@ -32,11 +43,10 @@ const FormData = ({ openModal }) => {
         <StepOneDetails
           openModal={openModal}
           nextStep={nextStep}
-          handleChange={handleChange}
           handleClick={handleClick}
           classTypeChosen={classTypeChosen}
           classType={classType}
-          formData={formData}
+          formik={formik}
         />
       );
     case 2:
@@ -44,9 +54,8 @@ const FormData = ({ openModal }) => {
         <StepTwoDetails
           nextStep={nextStep}
           prevStep={prevStep}
-          handleChange={handleChange}
           classType={classType}
-          formData={formData}
+          formik={formik}
         />
       );
   }
