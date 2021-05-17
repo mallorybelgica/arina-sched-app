@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -7,18 +8,26 @@ const Navbar = () => {
       <Logo src=".././logo.png" alt="logo" />
       <div>
         <Button>
-          <img src=".././home.png" alt="home" />
+          <NavLink to="/">
+            <img src=".././home.png" alt="home" />
+          </NavLink>
         </Button>
         <Button>
-          <img src=".././analytics.png" alt="analytics" />
+          <NavLink to="/analytics">
+            <img src=".././analytics.png" alt="analytics" />
+          </NavLink>
         </Button>
       </div>
       <div>
         <Button>
-          <img src=".././settings.png" alt="settings" />
+          <NavLink to="/account">
+            <img src=".././settings.png" alt="settings" />
+          </NavLink>
         </Button>
         <Button>
-          <img src=".././faqs.png" alt="faqs" />
+          <NavLink to="/faqs">
+            <img src=".././faqs.png" alt="faqs" />
+          </NavLink>
         </Button>
       </div>
       <Button>
@@ -53,4 +62,8 @@ const Button = styled.button`
   border-radius: 100%;
   background-color: rgb(255, 255, 255, 0.15);
   border: none;
+
+  &:active {
+    background-color: rgb(255, 255, 255, 0.45);
+  }
 `;

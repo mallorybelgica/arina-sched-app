@@ -4,6 +4,9 @@ import Navbar from "./Navbar";
 import ClassGrid from "./ClassGrid";
 import GlobalStyles from "./GlobalStyles";
 import ModalButton from "./ModalButton";
+import Analytics from "./Analytics";
+import UserAccount from "./UserAccount";
+import Faqs from "./Faqs";
 
 const App = () => {
   return (
@@ -13,6 +16,15 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <ClassGrid />
+        </Route>
+        <Route path="/analytics">
+          <Analytics />
+        </Route>
+        <Route path="/account">
+          <UserAccount />
+        </Route>
+        <Route path="/faq">
+          <Faqs />
         </Route>
       </Switch>
       <ModalButton />
