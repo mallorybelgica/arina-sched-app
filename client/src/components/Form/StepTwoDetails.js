@@ -21,6 +21,8 @@ const StepTwoDetails = ({ prevStep, formik }) => {
                 id="classDesc"
                 name="classDesc"
                 type="text"
+                rows="5"
+                cols="20"
                 onChange={formik.handleChange}
                 value={formik.values.classDesc}
               />
@@ -31,6 +33,8 @@ const StepTwoDetails = ({ prevStep, formik }) => {
                 id="whiteboard"
                 name="whiteboard"
                 type="text"
+                rows="5"
+                cols="20"
                 onChange={formik.handleChange}
                 value={formik.values.whiteboard}
               />
@@ -98,14 +102,15 @@ const FormLabel = styled.label`
   color: rgb(0, 0, 0, 0.65);
 `;
 
-const TextArea = styled.input`
+const TextArea = styled.textarea`
   width: 100%;
   padding: 0;
   margin: 0;
-  height: 75px;
   border: 1px #dad2cb solid;
   border-radius: 3px;
   margin-bottom: 18px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
 `;
 
 const Step = styled.p`

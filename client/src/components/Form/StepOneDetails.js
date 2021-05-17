@@ -114,6 +114,7 @@ const StepOneDetails = ({
                 id="duration"
                 name="duration"
                 type="number"
+                placeholder="Please enter duration in minutes"
                 onChange={formik.handleChange}
                 value={formik.values.duration}
                 disabled={!classTypeChosen}
@@ -127,6 +128,8 @@ const StepOneDetails = ({
                 id="price"
                 name="price"
                 type="number"
+                min="0.00"
+                step="0.01"
                 onChange={formik.handleChange}
                 value={formik.values.price}
                 disabled={!classTypeChosen}
@@ -259,6 +262,8 @@ const ClassNameInput = styled.input`
   border: 1px #dad2cb solid;
   border-radius: 3px;
   margin-bottom: 18px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
 `;
 
 const Input = styled.input`
@@ -266,6 +271,8 @@ const Input = styled.input`
   height: 35px;
   border: 1px #dad2cb solid;
   border-radius: 3px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
 `;
 
 const Select = styled.select`
@@ -273,6 +280,8 @@ const Select = styled.select`
   height: 35px;
   border: 1px #dad2cb solid;
   border-radius: 3px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
 `;
 
 const Step = styled.p`

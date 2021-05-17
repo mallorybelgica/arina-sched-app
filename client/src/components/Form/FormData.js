@@ -20,9 +20,9 @@ const FormData = ({ openModal }) => {
     initialValues: {
       className: "",
       dateTime: "",
-      frequency: "",
+      frequency: "None",
       duration: "",
-      price: "",
+      price: "0.00",
       classDesc: "",
       whiteboard: "",
       classType,

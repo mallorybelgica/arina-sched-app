@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const ClassGridItem = ({ userClass }) => {
-  console.log(userClass);
   return (
     <Wrapper>
       <NextClass>Your Next Class</NextClass>
