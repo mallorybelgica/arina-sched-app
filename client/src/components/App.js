@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./Navbar";
-import ClassGrid from "./ClassGrid";
+import ClassGridItem from "./ClassGridItem";
 import GlobalStyles from "./GlobalStyles";
 import ModalButton from "./ModalButton";
 import Analytics from "./Analytics";
@@ -15,7 +15,7 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route exact path="/">
-          <ClassGrid />
+          <ClassGridItem />
         </Route>
         <Route path="/analytics">
           <Analytics />

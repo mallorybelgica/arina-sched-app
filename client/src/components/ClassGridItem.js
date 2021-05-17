@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { userClass } from "../data";
 
-const ClassGridItem = ({ userClass }) => {
+const ClassGridItem = (props) => {
   return (
     <Wrapper>
       <NextClass>Your Next Class</NextClass>
@@ -33,6 +34,8 @@ const ClassGridItem = ({ userClass }) => {
 export default ClassGridItem;
 
 const Wrapper = styled.div`
+  min-width: 331px;
+  max-width: 450px;
   display: flex;
   flex-wrap: wrap;
   padding: 18px;
