@@ -8,10 +8,10 @@ const ModalButton = () => {
   const openModal = () => setIsOpen(!isOpen);
 
   return (
-    <div>
+    <>
       <Button onClick={openModal}>+</Button>
       {isOpen === true ? <FormData openModal={openModal} /> : ""}
-    </div>
+    </>
   );
 };
 
