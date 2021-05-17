@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <Wrapper>
       <Logo src=".././logo.png" alt="logo" />
-      <div>
+      <FirstSection>
         <Button>
           <NavLink to="/">
             <img src=".././home.png" alt="home" />
@@ -17,8 +17,8 @@ const Navbar = () => {
             <img src=".././analytics.png" alt="analytics" />
           </NavLink>
         </Button>
-      </div>
-      <div>
+      </FirstSection>
+      <SecondSection>
         <Button>
           <NavLink to="/account">
             <img src=".././settings.png" alt="settings" />
@@ -29,7 +29,7 @@ const Navbar = () => {
             <img src=".././faqs.png" alt="faqs" />
           </NavLink>
         </Button>
-      </div>
+      </SecondSection>
       <Button>
         <img src=".././exit.png" alt="exit" />
       </Button>
@@ -52,13 +52,36 @@ const Wrapper = styled.div`
 `;
 
 const Logo = styled.img`
+  padding-top: 10px;
   width: 27.07px;
   height: 54.46px;
+`;
+
+const FirstSection = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-top: 1px solid rgb(255, 255, 255, 0.5);
+  padding-top: 5px;
+  height: 35%;
+`;
+
+const SecondSection = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-bottom: 1px solid rgb(255, 255, 255, 0.5);
+  padding-bottom: 5px;
+  height: 35%;
 `;
 
 const Button = styled.button`
   width: 45px;
   height: 45px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   border-radius: 100%;
   background-color: rgb(255, 255, 255, 0.15);
   border: none;
